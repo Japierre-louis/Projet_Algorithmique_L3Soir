@@ -1,0 +1,237 @@
+package projet;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * <p>Titre: Arbres Binaires</p>
+ * <p>Université: ISG Tunis</p>
+ * <p>Classe: 2 IAG 9</p>
+ * <p>Groupe TP: 2</p>
+ * Auteur: Zammel Mohamed Zouhaier
+ * @version 1.0
+ */
+
+public class Graphique extends JFrame {
+  JPanel contentPane;
+  ArbreExpression arbre=new ArbreExpression(java.lang.String.class);
+  DessinArbre v=new DessinArbre(arbre);
+  JMenuBar jMenuBar1 = new JMenuBar();
+  JMenu jMenuFile = new JMenu();
+  JMenuItem jMenuFileExit = new JMenuItem();
+  JMenu jMenuHelp = new JMenu();
+  JMenuItem jMenuHelpAbout = new JMenuItem();
+  JPanel Panneau = new JPanel();
+  JTextField jTextField1 = new JTextField();
+  JButton jButton1 = new JButton();
+  JButton jButton2 = new JButton();
+  JButton jButton3 = new JButton();
+  JButton jButton4 = new JButton();
+  JButton jButton5 = new JButton();
+  JButton jButton6 = new JButton();
+  JButton jButton7 = new JButton();
+  JButton jButton8 = new JButton();
+  JButton jButton9 = new JButton();
+  JButton jButton10 = new JButton();
+  JButton jButton11 = new JButton();
+  JButton jButton12 = new JButton();
+  JButton jButton13 = new JButton();
+  JButton jButton14 = new JButton();
+  JButton jButton15 = new JButton();
+  JButton jButton16 = new JButton();
+  JButton jButton17 = new JButton();
+  JButton jButton18 = new JButton();
+  JButton jButton19 = new JButton();
+  JButton jButton110 = new JButton();
+  JLabel jLabel1 = new JLabel();
+
+  //Construct the frame
+  public Graphique() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+  //Component initialization
+  private void jbInit() throws Exception  {
+    contentPane = (JPanel) this.getContentPane();
+    contentPane.setLayout(null);
+    this.setSize(new Dimension(712, 596));
+    this.setTitle("Arbre D'expression Arithmétique");
+    jMenuFile.setText("File");
+    jMenuFileExit.setText("Exit");
+    jMenuFileExit.addActionListener(new Graphique_jMenuFileExit_ActionAdapter(this));
+    jMenuHelp.setText("Help");
+    jMenuHelpAbout.setText("About");
+    jMenuHelpAbout.addActionListener(new Graphique_jMenuHelpAbout_ActionAdapter(this));
+    Panneau.setBackground(Color.black);
+    Panneau.setBounds(new Rectangle(23, 10, 672, 279));
+    jTextField1.setFont(new java.awt.Font("Dialog", 1, 15));
+    jTextField1.setEditable(false);
+    jTextField1.setText("");
+    jTextField1.setBounds(new Rectangle(23, 296, 232, 26));
+    jButton1.setBounds(new Rectangle(22, 361, 43, 28));
+    jButton1.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton1.setActionCommand("1");
+    jButton1.setText("1");
+    jButton2.setText("2");
+    jButton2.setActionCommand("1");
+    jButton2.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton2.setBounds(new Rectangle(69, 361, 43, 28));
+    jButton3.setText("3");
+    jButton3.setActionCommand("1");
+    jButton3.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton3.setBounds(new Rectangle(115, 361, 43, 28));
+    jButton4.setText("4");
+    jButton4.setActionCommand("1");
+    jButton4.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton4.setBounds(new Rectangle(22, 394, 43, 28));
+    jButton5.setText("5");
+    jButton5.setActionCommand("1");
+    jButton5.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton5.setBounds(new Rectangle(69, 393, 43, 28));
+    jButton6.setText("6");
+    jButton6.setActionCommand("1");
+    jButton6.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton6.setBounds(new Rectangle(116, 393, 43, 28));
+    jButton7.setText("7");
+    jButton7.setActionCommand("1");
+    jButton7.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton7.setBounds(new Rectangle(22, 425, 43, 28));
+    jButton8.setText("8");
+    jButton8.setActionCommand("1");
+    jButton8.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton8.setBounds(new Rectangle(69, 424, 43, 28));
+    jButton9.setText("9");
+    jButton9.setActionCommand("1");
+    jButton9.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton9.setBounds(new Rectangle(116, 424, 43, 28));
+    jButton10.setText("0");
+    jButton10.setActionCommand("1");
+    jButton10.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton10.setBounds(new Rectangle(115, 455, 43, 28));
+    jButton11.setText("+/-");
+    jButton11.setActionCommand("1");
+    jButton11.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton11.setBounds(new Rectangle(23, 455, 88, 28));
+    jButton12.setText("(");
+    jButton12.setActionCommand("1");
+    jButton12.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton12.setBounds(new Rectangle(166, 360, 43, 28));
+    jButton13.setText(")");
+    jButton13.setActionCommand("1");
+    jButton13.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton13.setBounds(new Rectangle(214, 360, 43, 28));
+    jButton14.setText("+");
+    jButton14.setActionCommand("1");
+    jButton14.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton14.setBounds(new Rectangle(165, 394, 43, 28));
+    jButton15.setText("-");
+    jButton15.setActionCommand("1");
+    jButton15.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton15.setBounds(new Rectangle(214, 394, 43, 28));
+    jButton16.setText("*");
+    jButton16.setActionCommand("1");
+    jButton16.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton16.setBounds(new Rectangle(165, 425, 43, 28));
+    jButton17.setText("/");
+    jButton17.setActionCommand("1");
+    jButton17.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton17.setBounds(new Rectangle(215, 425, 43, 28));
+    jButton18.setBounds(new Rectangle(166, 455, 92, 28));
+    jButton18.setFont(new java.awt.Font("Monospaced", 1, 12));
+    jButton18.setActionCommand("1");
+    jButton18.setText("=");
+    jButton19.setBounds(new Rectangle(24, 328, 132, 28));
+    jButton19.setFont(new java.awt.Font("SansSerif", 1, 16));
+    jButton19.setActionCommand("1");
+    jButton19.setText("CE");
+    jButton110.setBounds(new Rectangle(165, 327, 90, 28));
+    jButton110.setFont(new java.awt.Font("SansSerif", 1, 15));
+    jButton110.setActionCommand("1");
+    jButton110.setText("<------");
+    jLabel1.setText("Expression Infixée:");
+    jLabel1.setBounds(new Rectangle(269, 299, 114, 20));
+    jMenuFile.add(jMenuFileExit);
+    jMenuHelp.add(jMenuHelpAbout);
+    jMenuBar1.add(jMenuFile);
+    jMenuBar1.add(jMenuHelp);
+    contentPane.add(Panneau, null);
+    contentPane.add(jTextField1, null);
+    contentPane.add(jButton1, null);
+    contentPane.add(jButton13, null);
+    contentPane.add(jButton15, null);
+    contentPane.add(jButton17, null);
+    contentPane.add(jButton16, null);
+    contentPane.add(jButton14, null);
+    contentPane.add(jButton12, null);
+    contentPane.add(jButton6, null);
+    contentPane.add(jButton9, null);
+    contentPane.add(jButton10, null);
+    contentPane.add(jButton11, null);
+    contentPane.add(jButton8, null);
+    contentPane.add(jButton7, null);
+    contentPane.add(jButton4, null);
+    contentPane.add(jButton5, null);
+    contentPane.add(jButton2, null);
+    contentPane.add(jButton19, null);
+    contentPane.add(jButton110, null);
+    contentPane.add(jButton3, null);
+    contentPane.add(jButton18, null);
+    contentPane.add(jLabel1, null);
+    this.setJMenuBar(jMenuBar1);
+    v.ajoute("/");
+    v.ajoute("*");
+   v.ajoute("+");
+   v.ajoute("5");
+   v.ajoute("6");
+   v.ajoute("-");
+   v.ajoute("-4");
+   v.ajoute("9");
+   v.ajoute("+");
+   v.ajoute("13");
+     v.ajoute("1256");
+
+
+  }
+  //File | Exit action performed
+  public void jMenuFileExit_actionPerformed(ActionEvent e) {
+    System.exit(0);
+  }
+  //Help | About action performed
+  public void jMenuHelpAbout_actionPerformed(ActionEvent e) {
+  }
+  //Overridden so we can exit when window is closed
+  protected void processWindowEvent(WindowEvent e) {
+    super.processWindowEvent(e);
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      jMenuFileExit_actionPerformed(null);
+    }
+  }
+}
+
+class Graphique_jMenuFileExit_ActionAdapter implements ActionListener {
+  Graphique adaptee;
+
+  Graphique_jMenuFileExit_ActionAdapter(Graphique adaptee) {
+    this.adaptee = adaptee;
+  }
+  public void actionPerformed(ActionEvent e) {
+    adaptee.jMenuFileExit_actionPerformed(e);
+  }
+}
+
+class Graphique_jMenuHelpAbout_ActionAdapter implements ActionListener {
+  Graphique adaptee;
+
+  Graphique_jMenuHelpAbout_ActionAdapter(Graphique adaptee) {
+    this.adaptee = adaptee;
+  }
+  public void actionPerformed(ActionEvent e) {
+    adaptee.jMenuHelpAbout_actionPerformed(e);
+  }
+}

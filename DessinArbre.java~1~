@@ -1,0 +1,179 @@
+package projet;
+
+/**
+ * <p>Titre: Arbres Binaires</p>
+ * <p>Université: ISG Tunis</p>
+ * <p>Classe: 2 IAG 9</p>
+ * <p>Groupe TP: 2</p>
+ * Auteur: Zammel Mohamed Zouhaier
+ * @version 1.0
+ */
+
+import javax.swing.JComponent;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+
+/**
+* Composant dessinant un arbre binaire ordonée
+*/
+public class DessinArbre extends JComponent
+{
+    //Arbre binaire ordoné dessiné
+  ArbreExpression arbre;
+    //Dimension par défaut
+    private Dimension dimension=new Dimension(200,200);
+
+    /**
+     * Crée le composant
+     */
+    public DessinArbre(ArbreExpression Arbre)
+    {
+      arbre=Arbre;
+    setForeground(Color.BLUE);
+    setBackground(Color.BLACK);
+    setFont(new Font("Dialog",Font.PLAIN,25));
+    setPreferredSize(dimension);
+    }
+
+    /**
+     * Ajoute une donnée à l'arbre
+     */
+    public void ajoute(Comparable donnee) throws ArbreSatureException,
+      TypeIncompatibleException {
+    arbre.Insérer(donnee);
+    }
+
+    //Hauteur du texte en pixel
+    private int hauteurTexte(FontMetrics fm)
+    {
+    return fm.getHeight();
+    }
+
+    //Largeur de la chaine en pixel
+    private int largeurTexte(FontMetrics fm,String chaine)
+    {
+    return fm.stringWidth(chaine);
+    }
+
+    //Décalage qu'il faut appliquer pour positioné le texte en hauteur
+    private int decalageTexte(FontMetrics fm)
+    {
+    return fm.getAscent();
+    }
+
+    //Ecrit la chaine centre selon x, à la hauteur y
+    private void ecrireCentrer(int x,int y,String chaine,Graphics g,FontMetrics fm)
+    {
+    int lg=largeurTexte(fm,chaine);
+    g.drawString(chaine,x-lg/2,y+decalageTexte(fm));
+    }
+
+    // Dessine le composant
+    protected void paintComponent(Graphics g)
+    {
+    //Vide le composant
+    g.setColor(getBackground());
+    g.fillRect(0,0,getWidth(),getHeight());
+    //Intialise la fonction de mesure,la police et la couleur d'écriture
+    FontMetrics fm=getFontMetrics(getFont());
+    g.setFont(getFont());
+    g.setColor(getForeground());
+    //Intialise la position de départ
+    int x=0;
+    int y=0;
+    int larg=getWidth();
+    int haut=hauteurTexte(fm);
+    //Dessine l'arbre en lui même
+    dessine(g,arbre.Ref_Racine,x,y,larg,haut,fm);
+    }
+
+    //Dessine un arbre
+    //g : Graphics permétant de dessiner
+    //abo : Arbre binair ordonné à dessiner
+    //x : abscisse minimale du rectangle de dessin
+    //y : ordonée du dessin
+    //larg : largeur reservée au dessin
+    //haut : hauteur d'une chaine de caractères
+    //fm : Mesusreur de chaîne de caractères
+    private void dessine(Graphics g,NoeudArbre abo,int x,int y,int larg,int haut,FontMetrics fm)
+    {
+
+    //Initialise
+    int lg=larg/2;
+    int mx=x+lg;
+    //Ecrit la racine
+    ecrireCentrer(mx,y,abo.Info.toString(),g,fm);
+    //Incrèmente y
+    y += haut;
+    //S'il s'agit d'une feuille, le dessin est terminé
+    //On dessine, si il existe, le coté gauche
+    NoeudArbre gauche=abo.FG;
+    if(gauche!=null)
+    {
+        //on dessine un lien entre la racine et la branche gauche
+        g.drawLine(mx,y,x+lg/2,y+20);
+        //On dessine la branche gauche
+        dessine(g,gauche,x,y+20,lg,haut,fm);
+    }
+    //On dessine, si il existe, le coté droit
+    NoeudArbre droit=abo.FD;
+    if(droit!=null)
+    {
+        //on dessine un lien entre la racine et la branche droite
+        g.drawLine(mx,y,mx+lg/2,y+20);
+        //On dessine la branche droite
+        dessine(g,droit,mx,y+20,lg,haut,fm);
+    }
+    }
+
+    /**
+     * Donne la dimension optimale au composant
+     */
+    public void calculDimension()
+    {
+    //Intialise le mesureuer de chaîne
+    FontMetrics fm=getFontMetrics(getFont());
+    //Calcul de la hauteur
+    int nb=arbre.Taille()+1;
+    int haut=hauteurTexte(fm)*nb+20*(nb-1);
+    if(haut<100)
+        haut=100;
+    //Calcul de la largeur
+    int larg=0;
+    if(!arbre.Vide())
+        larg=calculLarg(arbre.Ref_Racine,fm);
+    if(larg<100)
+        larg=100;
+    //Impose la dimension calculée
+    dimension.setSize(larg,haut);
+    setPreferredSize(dimension);
+    setSize(dimension);
+    setMinimumSize(dimension);
+    setMaximumSize(dimension);
+    }
+
+    //Cacul la largeur minimale d'un arbre
+    private int calculLarg(NoeudArbre abo,FontMetrics fm)
+    {
+    //On intialise avec la largeur de la racine
+    int lg=largeurTexte(fm,abo.Info.toString());
+    //On calcul largeur de la partie gauche
+    int g=0;
+    NoeudArbre ga=abo.FG;
+    if(ga!=null)
+        g=calculLarg(ga,fm);
+    //On calcul largeur de la partie droite
+    int d=0;
+    NoeudArbre dr=abo.FD;
+    if(dr!=null)
+        d=calculLarg(dr,fm);
+    //On en déduit la rgeur des deux réunis
+    int s=2*Math.max(d,g)+5;
+    //On renvoie la largeur minimale pour un affichage lisible
+    return Math.max(lg,s);
+    }
+
+}
